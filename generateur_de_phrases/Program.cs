@@ -64,16 +64,33 @@ namespace generateur_de_phrases
                 "une carte"
             };
 
-            for (int i = 0; i < 100; i++)
+            const int NB_PHRASES = 200;
+            int repete = 0;
+            var liste_phrases = new List<string>();
+            int i = 0;
+            while (i < NB_PHRASES)
             {
                 string sujet = ObtenirElementAleatoire(sujets);
                 string verbe = ObtenirElementAleatoire(verbes);
                 string complement = ObtenirElementAleatoire(complements);
                 string phrase = sujet + " " + verbe + " " + complement;
                 phrase = phrase.Replace("à le","au");
-                Console.WriteLine(phrase);
+                if (liste_phrases.Contains(phrase))
+                {
+                    repete++;
+                }
+                else
+                {
+                    liste_phrases.Add(phrase);
+                    i++;
+                    Console.WriteLine(phrase);
+                }
 
             }
+
+            Console.WriteLine($"Nombre de phrases : {NB_PHRASES}");
+            Console.WriteLine($"Nombre de doublons évités : {repete}");
+
         }
     }
 }
